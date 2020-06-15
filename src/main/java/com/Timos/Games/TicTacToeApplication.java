@@ -1,4 +1,4 @@
-package com.Timos.TicTacToe;
+package com.Timos.Games;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

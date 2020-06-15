@@ -1,4 +1,4 @@
-package com.Timos.TicTacToe;
+package com.Timos.Games;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
