@@ -5,4 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface IGame {
 
+    public Boolean isInputValidForGame(Integer input);
+
+    public Boolean isGameFinished();
 }

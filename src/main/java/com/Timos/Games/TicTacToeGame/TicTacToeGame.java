@@ -14,5 +14,11 @@ public class TicTacToeGame implements IGame {
         player = CellState.O;
     }
 
+    public Boolean isInputValidForGame (Integer input)  {
+        return board.isInputValid(input);
+    }
 
+    public Boolean isGameFinished(){
+        return board.isFinished();
+    }
 }
