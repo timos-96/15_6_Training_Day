@@ -3,7 +3,6 @@ package com.Timos.Games.TicTacToeGame;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -35,6 +34,17 @@ public class Board {
         }
     }
 
+    public void placeMove(Integer input, CellState symbol){
+        getCells().get(input).setCellState(symbol);
+        System.out.println("Move placed on cell " + input);
+    }
+
+    public void showBoard(){
+        for (int i = 0; i < getCells().size(); i++) {
+            System.out.println(getCells().get(i).getCellState());
+        }
+    }
+
     public Boolean isFinished(){
         return (isDraw() || isWin());
     }
@@ -44,13 +54,14 @@ public class Board {
             Integer[] winningCombination = winningCombinations[i];
             if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombinations[i], CellState.X))
             {
+                System.out.println("Congradulations you have won");
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isSymbolWinner(Integer[] winningCombination, CellState symbol) {
+    private Boolean isSymbolWinner(Integer[] winningCombination, CellState symbol) {
         Boolean isWon = getCells().get(winningCombination[0]).cellState == symbol
                 && getCells().get(winningCombination[1]).cellState == symbol
                 && getCells().get(winningCombination[2]).cellState == symbol;
@@ -58,9 +69,13 @@ public class Board {
 
     }
 
-    private boolean isDraw() {
-        return !IntStream.rangeClosed(0, getCells().size() - 1)
+    private Boolean isDraw() {
+        Boolean isDraw = !IntStream.rangeClosed(0, getCells().size() - 1)
                 .anyMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
+        if (isDraw){
+            System.out.println("Draw... pathetic");
+        }
+        return isDraw;
     }
 
     public List<Cell> getCells() {

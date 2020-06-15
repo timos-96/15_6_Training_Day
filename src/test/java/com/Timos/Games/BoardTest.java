@@ -132,4 +132,16 @@ public class BoardTest {
         board.getCells().get(6).setCellState(CellState.X);
         assertTrue(board.isFinished());
     }
+
+    @Test
+    void shouldPlaceMove(){
+        board.placeMove(1, CellState.O);
+        assertEquals(board.getCells().get(1).getCellState(), CellState.O);
+    }
+
+    @Test
+    void shouldNotPlaceMoveOnOtherCells(){
+        board.placeMove(2, CellState.O);
+        assertNotEquals(board.getCells().get(1).getCellState(), CellState.O);
+    }
 }

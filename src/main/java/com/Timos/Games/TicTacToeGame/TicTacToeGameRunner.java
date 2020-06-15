@@ -14,7 +14,7 @@ public class TicTacToeGameRunner extends GameRunner{
     @Autowired
     private ConsoleInputRetriever retriever;
 
-//    @PostConstruct
+    @PostConstruct
     public void runTicTacToe() {
         super.run(game, retriever);
     }
