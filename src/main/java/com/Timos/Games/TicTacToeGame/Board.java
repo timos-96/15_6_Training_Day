@@ -95,8 +95,4 @@ public class Board {
     public List<Cell> getCells() {
         return cells;
     }
-
-    public void setCells(List<Cell> cells) {
-        this.cells = cells;
-    }
 }
