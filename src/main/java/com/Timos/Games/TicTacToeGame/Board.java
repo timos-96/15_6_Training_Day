@@ -3,9 +3,11 @@ package com.Timos.Games.TicTacToeGame;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.util.stream.Stream.generate;
 
 @Component
 public class Board {
@@ -34,7 +36,7 @@ public class Board {
     };
 
     public Board() {
-        cells = Collections.nCopies(GRID_SIZE, new Cell());
+        cells = generate(Cell::new).limit(GRID_SIZE).collect(Collectors.toList());
     }
 
     public Boolean isInputValid(Integer input) {
