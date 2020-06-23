@@ -1,9 +1,14 @@
 package com.Timos.Games;
 
 import com.Timos.Games.TicTacToeGame.Board;
+import com.Timos.Games.TicTacToeGame.Cell;
 import com.Timos.Games.TicTacToeGame.CellState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,22 +23,18 @@ public class BoardTest {
 
     @Test
     void shouldCreateBoard() {
-        assertFalse(board == null);
+        assertNotNull(board);
     }
 
     @Test
     void shouldcreateAListOf9EmptyCells() {
         assertAll("Should return 9 empty cells",
             () -> assertEquals(9, board.getCells().size()),
-            () -> assertSame(board.getCells().get(0).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(1).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(2).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(3).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(4).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(5).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(6).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(7).getCellState(), CellState.NOT_TAKEN),
-            () -> assertSame(board.getCells().get(8).getCellState(), CellState.NOT_TAKEN));
+            () -> assertEquals(
+                board.getCells().stream().map(Cell::getCellState).collect(Collectors.toUnmodifiableSet()),
+                Set.of(CellState.NOT_TAKEN)
+            )
+        );
     }
 
     @Test
@@ -91,41 +92,31 @@ public class BoardTest {
 
     @Test
     void shouldFinishWhenVerticalVictoryConditionIsMetForX() {
-        board.getCells().get(0).setCellState(CellState.X);
-        board.getCells().get(3).setCellState(CellState.X);
-        board.getCells().get(6).setCellState(CellState.X);
+        setCells(List.of(0, 3, 6), CellState.X);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenVerticalVictoryConditionIsMetForO() {
-        board.getCells().get(1).setCellState(CellState.O);
-        board.getCells().get(4).setCellState(CellState.O);
-        board.getCells().get(7).setCellState(CellState.O);
+        setCells(List.of(1, 4, 7), CellState.O);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenVerticalVictoryConditionIsMetForX2() {
-        board.getCells().get(2).setCellState(CellState.X);
-        board.getCells().get(5).setCellState(CellState.X);
-        board.getCells().get(8).setCellState(CellState.X);
+        setCells(List.of(2, 5, 8), CellState.X);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenDiagonalVictoryConditionIsMetForO() {
-        board.getCells().get(0).setCellState(CellState.O);
-        board.getCells().get(4).setCellState(CellState.O);
-        board.getCells().get(8).setCellState(CellState.O);
+        setCells(List.of(0, 4, 8), CellState.O);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenDiagonalVictoryConditionIsMetForX() {
-        board.getCells().get(2).setCellState(CellState.X);
-        board.getCells().get(4).setCellState(CellState.X);
-        board.getCells().get(6).setCellState(CellState.X);
+        setCells(List.of(2, 4, 6), CellState.X);
         assertTrue(board.isFinished());
     }
 
@@ -139,5 +130,11 @@ public class BoardTest {
     void shouldNotPlaceMoveOnOtherCells() {
         board.placeMove(2, CellState.O);
         assertNotEquals(board.getCells().get(1).getCellState(), CellState.O);
+    }
+
+    private void setCells(List<Integer> cellIndices, CellState cellState) {
+        cellIndices.forEach(
+            cellIndex -> board.getCells().get(cellIndex).setCellState(cellState)
+        );
     }
 }
