@@ -39,15 +39,11 @@ public class Board {
     }
 
     public Boolean isInputValid(Integer input) {
-        try {
-            if (input < 0 || input > cells.size()) {
-                throw new IndexOutOfBoundsException("Please re-enter move");
-            } else {
-                return cells.get(input).cellState == CellState.NOT_TAKEN;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+        if (input < 0 || input >= cells.size()) {
+            System.out.println("Please re-enter move");
             return false;
+        } else {
+            return cells.get(input).cellState == CellState.NOT_TAKEN;
         }
     }
 
