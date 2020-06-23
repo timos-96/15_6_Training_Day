@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.Timos.Games.TicTacToeGame.CellState;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 public class BoardTest {
 
-    @Autowired
-    Board board;
+    Board board = new Board();
 
     @BeforeEach
     void setup() {
