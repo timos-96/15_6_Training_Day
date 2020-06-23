@@ -1,13 +1,11 @@
 package com.Timos.Games;
 
 import com.Timos.Games.TicTacToeGame.Board;
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.Timos.Games.TicTacToeGame.CellState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.Timos.Games.TicTacToeGame.CellState;
-import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
@@ -19,80 +17,80 @@ public class BoardTest {
     }
 
     @Test
-    void shouldCreateBoard(){
+    void shouldCreateBoard() {
         assertFalse(board == null);
     }
 
     @Test
-    void shouldcreateAListOf9EmptyCells(){
+    void shouldcreateAListOf9EmptyCells() {
         assertAll("Should return 9 empty cells",
-                () -> assertTrue(board.getCells().size() == 9),
-                () -> assertTrue(board.getCells().get(0).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(1).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(2).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(3).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(4).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(5).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(6).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(7).getCellState() == CellState.NOT_TAKEN),
-                () -> assertTrue(board.getCells().get(8).getCellState() == CellState.NOT_TAKEN));
+            () -> assertTrue(board.getCells().size() == 9),
+            () -> assertTrue(board.getCells().get(0).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(1).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(2).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(3).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(4).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(5).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(6).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(7).getCellState() == CellState.NOT_TAKEN),
+            () -> assertTrue(board.getCells().get(8).getCellState() == CellState.NOT_TAKEN));
     }
 
     @Test
-    void shouldAllowMoveOnEmptyCell(){
+    void shouldAllowMoveOnEmptyCell() {
         assertTrue(board.isInputValid(1));
     }
 
     @Test
-    void shouldNotAllowMoveOnOccupiedCell(){
+    void shouldNotAllowMoveOnOccupiedCell() {
         board.getCells().get(1).setCellState(CellState.O);
         assertFalse(board.isInputValid(1));
     }
 
     @Test
-    void shouldNotAllowMoveSmallerThanBoardSize(){
+    void shouldNotAllowMoveSmallerThanBoardSize() {
         assertFalse(board.isInputValid(-1));
     }
 
     @Test
-    void shouldNotAllowMoveLargerThanBoardSize(){
+    void shouldNotAllowMoveLargerThanBoardSize() {
         assertFalse(board.isInputValid(9));
     }
 
     @Test
-    void shouldFinishWhenNoMovesLeft(){
-        for(int i = 0; i < board.getCells().size(); i++){
+    void shouldFinishWhenNoMovesLeft() {
+        for (int i = 0; i < board.getCells().size(); i++) {
             board.getCells().get(i).setCellState(CellState.O);
         }
         assertTrue(board.isFinished());
     }
 
     @Test
-    void shouldFinishWhenVictoryConditionIsMetForO(){
-        for(int i = 0; i < 3; i++){
+    void shouldFinishWhenVictoryConditionIsMetForO() {
+        for (int i = 0; i < 3; i++) {
             board.getCells().get(i).setCellState(CellState.O);
         }
         assertTrue(board.isFinished());
     }
 
     @Test
-    void shouldFinishWhenHorizontalVictoryConditionIsMetForX(){
-        for(int i = 3; i < 6; i++){
+    void shouldFinishWhenHorizontalVictoryConditionIsMetForX() {
+        for (int i = 3; i < 6; i++) {
             board.getCells().get(i).setCellState(CellState.X);
         }
         assertTrue(board.isFinished());
     }
 
     @Test
-    void shouldFinishWhenHorizontalVictoryConditionIsMetForO2(){
-        for(int i = 6; i < 9; i++){
+    void shouldFinishWhenHorizontalVictoryConditionIsMetForO2() {
+        for (int i = 6; i < 9; i++) {
             board.getCells().get(i).setCellState(CellState.X);
         }
         assertTrue(board.isFinished());
     }
 
     @Test
-    void shouldFinishWhenVerticalVictoryConditionIsMetForX(){
+    void shouldFinishWhenVerticalVictoryConditionIsMetForX() {
         board.getCells().get(0).setCellState(CellState.X);
         board.getCells().get(3).setCellState(CellState.X);
         board.getCells().get(6).setCellState(CellState.X);
@@ -100,7 +98,7 @@ public class BoardTest {
     }
 
     @Test
-    void shouldFinishWhenVerticalVictoryConditionIsMetForO(){
+    void shouldFinishWhenVerticalVictoryConditionIsMetForO() {
         board.getCells().get(1).setCellState(CellState.O);
         board.getCells().get(4).setCellState(CellState.O);
         board.getCells().get(7).setCellState(CellState.O);
@@ -108,7 +106,7 @@ public class BoardTest {
     }
 
     @Test
-    void shouldFinishWhenVerticalVictoryConditionIsMetForX2(){
+    void shouldFinishWhenVerticalVictoryConditionIsMetForX2() {
         board.getCells().get(2).setCellState(CellState.X);
         board.getCells().get(5).setCellState(CellState.X);
         board.getCells().get(8).setCellState(CellState.X);
@@ -116,7 +114,7 @@ public class BoardTest {
     }
 
     @Test
-    void shouldFinishWhenDiagonalVictoryConditionIsMetForO(){
+    void shouldFinishWhenDiagonalVictoryConditionIsMetForO() {
         board.getCells().get(0).setCellState(CellState.O);
         board.getCells().get(4).setCellState(CellState.O);
         board.getCells().get(8).setCellState(CellState.O);
@@ -124,7 +122,7 @@ public class BoardTest {
     }
 
     @Test
-    void shouldFinishWhenDiagonalVictoryConditionIsMetForX(){
+    void shouldFinishWhenDiagonalVictoryConditionIsMetForX() {
         board.getCells().get(2).setCellState(CellState.X);
         board.getCells().get(4).setCellState(CellState.X);
         board.getCells().get(6).setCellState(CellState.X);
@@ -132,13 +130,13 @@ public class BoardTest {
     }
 
     @Test
-    void shouldPlaceMove(){
+    void shouldPlaceMove() {
         board.placeMove(1, CellState.O);
         assertEquals(board.getCells().get(1).getCellState(), CellState.O);
     }
 
     @Test
-    void shouldNotPlaceMoveOnOtherCells(){
+    void shouldNotPlaceMoveOnOtherCells() {
         board.placeMove(2, CellState.O);
         assertNotEquals(board.getCells().get(1).getCellState(), CellState.O);
     }
