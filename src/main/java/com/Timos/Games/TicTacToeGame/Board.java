@@ -46,7 +46,7 @@ public class Board {
                 return cells.get(input).cellState == CellState.NOT_TAKEN;
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return false;
         }
     }
