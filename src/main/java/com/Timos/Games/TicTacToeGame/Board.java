@@ -69,7 +69,7 @@ public class Board {
     private Boolean isWin() {
         for (Integer[] winningCombination : winningCombinations) {
             if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombination, CellState.X)) {
-                System.out.println("Congradulations you have won");
+                System.out.println("Congratulations you have won");
                 return true;
             }
         }
