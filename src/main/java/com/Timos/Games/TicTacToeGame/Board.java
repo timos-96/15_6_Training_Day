@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Stream.generate;
@@ -81,11 +80,10 @@ public class Board {
     }
 
     private Boolean isDraw() {
-        Boolean isDraw = IntStream.rangeClosed(0, getCells().size() - 1)
-            .noneMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
-        if (isDraw) {
-            System.out.println("Draw... pathetic");
-        }
+        Boolean isDraw = cells.stream()
+            .map(Cell::getCellState)
+            .noneMatch(state -> state == CellState.NOT_TAKEN);
+        if (isDraw) System.out.println("Draw... pathetic");
         return isDraw;
     }
 
