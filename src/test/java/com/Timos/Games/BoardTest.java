@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
-    Board board = new Board();
+    Board board;
 
     @BeforeEach
     void setup() {
