@@ -27,7 +27,7 @@ public class BoardTest {
     }
 
     @Test
-    void shouldcreateAListOf9EmptyCells() {
+    void shouldCreateAListOf9EmptyCells() {
         assertAll("Should return 9 empty cells",
             () -> assertEquals(9, board.getCells().size()),
             () -> assertEquals(
