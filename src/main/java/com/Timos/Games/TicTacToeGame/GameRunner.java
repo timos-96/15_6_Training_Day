@@ -1,36 +1,35 @@
 package com.Timos.Games.TicTacToeGame;
 
-import com.Timos.Games.GameComponents.IGame;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GameRunner {
 
-    public static void run(IGame game, ConsoleInputRetriever retriever) {
+    public static void run(TicTacToeGame game, ConsoleInputRetriever retriever) {
 
         Integer input = null;
-        Boolean isNotValidInput = true;
-        Boolean isNotGameOver = true;
+        boolean isValidInput = false;
+        boolean isGameOver = false;
 
         System.out.println("Starting the game");
 
-        while (isNotGameOver) {
-            while (isNotValidInput) {
+        while (!isGameOver) {
+            while (!isValidInput) {
                 input = retriever.retrieveInput(System.in).orElse(null);
                 if (input == null) {
-                    isNotValidInput = true;
+                    isValidInput = false;
                 } else {
-                    isNotValidInput = !game.isInputValidForGame(input);
+                    isValidInput = game.isInputValidForGame(input);
                 }
             }
 
-            isNotValidInput = true;
+            isValidInput = true;
 
             game.placeMoveOnBoard(input);
 
             game.showGame();
 
-            isNotGameOver = !game.isGameFinished();
+            isGameOver = game.isGameFinished();
         }
     }
 }

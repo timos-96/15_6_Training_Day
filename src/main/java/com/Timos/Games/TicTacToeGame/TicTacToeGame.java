@@ -1,18 +1,12 @@
 package com.Timos.Games.TicTacToeGame;
 
-import com.Timos.Games.GameComponents.IGame;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TicTacToeGame implements IGame {
+public class TicTacToeGame {
 
-    private Board board;
+    private Board board = new Board();
     private CellState player = CellState.O;
-
-    public TicTacToeGame(){
-        board = new Board();
-        player = CellState.O;
-    }
 
     public Boolean isInputValidForGame (Integer input)  {
         return board.isInputValid(input);
