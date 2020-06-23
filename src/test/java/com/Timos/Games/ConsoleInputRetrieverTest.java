@@ -22,6 +22,6 @@ public class ConsoleInputRetrieverTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Assertions.assertTrue(retriever.retrieveInput(in) == 1);
+        Assertions.assertEquals(1, retriever.retrieveInput(in));
     }
 }
