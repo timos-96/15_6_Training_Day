@@ -57,9 +57,7 @@ public class Board {
     }
 
     public void showBoard() {
-        getCells().forEach(cell -> {
-            System.out.println(cell.getCellState());
-        });
+        getCells().forEach(cell -> System.out.println(cell.getCellState()));
     }
 
     public Boolean isFinished() {
