@@ -10,6 +10,6 @@ public class CellTest {
     @Test
     void constructorShouldCreateEmptyCell(){
         Cell cell = new Cell();
-        Assertions.assertTrue(cell.getCellState() == CellState.NOT_TAKEN);
+        Assertions.assertSame(cell.getCellState(), CellState.NOT_TAKEN);
     }
 }
