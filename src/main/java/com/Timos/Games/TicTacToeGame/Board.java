@@ -2,7 +2,6 @@ package com.Timos.Games.TicTacToeGame;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,10 +42,8 @@ public class Board {
         try {
             if (input < 0 || input > cells.size()) {
                 throw new IndexOutOfBoundsException("Please re-enter move");
-            } else if (cells.get(input).cellState == CellState.NOT_TAKEN) {
-                return true;
             } else {
-                return false;
+                return cells.get(input).cellState == CellState.NOT_TAKEN;
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
