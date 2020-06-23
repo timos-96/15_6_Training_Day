@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Stream.generate;
 
@@ -68,8 +69,7 @@ public class Board {
     }
 
     private boolean isWin(Integer[] winningCombination) {
-        return List.of(CellState.X, CellState.O)
-            .stream()
+        return Stream.of(CellState.X, CellState.O)
             .anyMatch(cellState -> isSymbolWinner(winningCombination, cellState));
     }
 
