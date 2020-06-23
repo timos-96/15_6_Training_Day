@@ -3,19 +3,38 @@ package com.Timos.Games.TicTacToeGame;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
 public class Board {
 
-    private List<Cell> cells;
-    private final Integer[][] winningCombinations = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
-    private final Integer boardSize = 9;
+    private static final Integer GRID_SIZE = 9;
+    private static final Integer TOP_LEFT = 0;
+    private static final Integer TOP_CENTER = 1;
+    private static final Integer TOP_RIGHT = 2;
+    private static final Integer MIDDLE_LEFT = 3;
+    private static final Integer MIDDLE_CENTER = 4;
+    private static final Integer MIDDLE_RIGHT = 5;
+    private static final Integer BOTTOM_LEFT = 6;
+    private static final Integer BOTTOM_CENTER = 7;
+    private static final Integer BOTTOM_RIGHT = 8;
 
-    public Board(){
-       cells = new ArrayList<Cell>();
-       IntStream.rangeClosed(1, boardSize).forEach(i -> cells.add(new Cell()));
+    private List<Cell> cells;
+    private final Integer[][] winningCombinations = {
+        {TOP_LEFT, TOP_CENTER, TOP_RIGHT},
+        {MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT},
+        {BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT},
+        {TOP_LEFT, MIDDLE_LEFT, BOTTOM_LEFT},
+        {TOP_CENTER, MIDDLE_CENTER, BOTTOM_CENTER},
+        {TOP_RIGHT, MIDDLE_RIGHT, BOTTOM_RIGHT},
+        {TOP_LEFT, MIDDLE_CENTER, BOTTOM_RIGHT},
+        {TOP_RIGHT, MIDDLE_CENTER, BOTTOM_LEFT}
+    };
+
+    public Board() {
+        cells = Collections.nCopies(GRID_SIZE, new Cell());
     }
 
     public Boolean isInputValid(Integer input) {
@@ -27,33 +46,31 @@ public class Board {
             } else {
                 return false;
             }
-        }
-        catch(IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
             return false;
         }
     }
 
-    public void placeMove(Integer input, CellState symbol){
+    public void placeMove(Integer input, CellState symbol) {
         getCells().get(input).setCellState(symbol);
         System.out.println("Move placed on cell " + input);
     }
 
-    public void showBoard(){
+    public void showBoard() {
         for (int i = 0; i < getCells().size(); i++) {
             System.out.println(getCells().get(i).getCellState());
         }
     }
 
-    public Boolean isFinished(){
+    public Boolean isFinished() {
         return (isDraw() || isWin());
     }
 
-    private Boolean isWin(){
+    private Boolean isWin() {
         for (int i = 0; i < winningCombinations.length; i++) {
             Integer[] winningCombination = winningCombinations[i];
-            if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombinations[i], CellState.X))
-            {
+            if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombinations[i], CellState.X)) {
                 System.out.println("Congradulations you have won");
                 return true;
             }
@@ -63,16 +80,16 @@ public class Board {
 
     private Boolean isSymbolWinner(Integer[] winningCombination, CellState symbol) {
         Boolean isWon = getCells().get(winningCombination[0]).cellState == symbol
-                && getCells().get(winningCombination[1]).cellState == symbol
-                && getCells().get(winningCombination[2]).cellState == symbol;
+            && getCells().get(winningCombination[1]).cellState == symbol
+            && getCells().get(winningCombination[2]).cellState == symbol;
         return isWon;
 
     }
 
     private Boolean isDraw() {
         Boolean isDraw = !IntStream.rangeClosed(0, getCells().size() - 1)
-                .anyMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
-        if (isDraw){
+            .anyMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
+        if (isDraw) {
             System.out.println("Draw... pathetic");
         }
         return isDraw;
