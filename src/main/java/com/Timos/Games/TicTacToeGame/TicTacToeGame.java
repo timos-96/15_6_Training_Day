@@ -8,20 +8,20 @@ public class TicTacToeGame {
     private Board board = new Board();
     private CellState player = CellState.O;
 
-    public Boolean isInputValidForGame (Integer input)  {
+    public Boolean isInputValidForGame(Integer input) {
         return board.isInputValid(input);
     }
 
-    public void placeMoveOnBoard(Integer input){
+    public void placeMoveOnBoard(Integer input) {
         board.placeMove(input, player);
         player = player == CellState.O ? CellState.X : CellState.O;
     }
 
-    public void showGame(){
+    public void showGame() {
         board.showBoard();
     }
 
-    public Boolean isGameFinished(){
+    public Boolean isGameFinished() {
         return board.isFinished();
     }
 }
