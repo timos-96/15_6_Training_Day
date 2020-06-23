@@ -1,13 +1,12 @@
 package com.Timos.Games.TicTacToeGame;
 
 import com.Timos.Games.GameComponents.IGame;
-import com.Timos.Games.GameComponents.IInputRetriever;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GameRunner {
 
-    public static void run(IGame game, IInputRetriever retriever){
+    public static void run(IGame game, ConsoleInputRetriever retriever) {
 
         Integer input = null;
         Boolean isNotValidInput = true;
@@ -15,13 +14,12 @@ public class GameRunner {
 
         System.out.println("Starting the game");
 
-        while(isNotGameOver) {
+        while (isNotGameOver) {
             while (isNotValidInput) {
-                input = retriever.retrieveInput(System.in);
-                if(input == null){
+                input = retriever.retrieveInput(System.in).orElse(null);
+                if (input == null) {
                     isNotValidInput = true;
-                }
-                else {
+                } else {
                     isNotValidInput = !game.isInputValidForGame(input);
                 }
             }
@@ -32,7 +30,7 @@ public class GameRunner {
 
             game.showGame();
 
-            isNotGameOver= !game.isGameFinished();
+            isNotGameOver = !game.isGameFinished();
         }
     }
 }
