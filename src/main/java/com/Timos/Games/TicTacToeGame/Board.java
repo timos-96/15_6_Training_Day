@@ -84,8 +84,8 @@ public class Board {
     }
 
     private Boolean isDraw() {
-        Boolean isDraw = !IntStream.rangeClosed(0, getCells().size() - 1)
-            .anyMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
+        Boolean isDraw = IntStream.rangeClosed(0, getCells().size() - 1)
+            .noneMatch(i -> getCells().get(i).getCellState() == CellState.NOT_TAKEN);
         if (isDraw) {
             System.out.println("Draw... pathetic");
         }
