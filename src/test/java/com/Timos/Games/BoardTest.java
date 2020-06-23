@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,33 +61,25 @@ public class BoardTest {
 
     @Test
     void shouldFinishWhenNoMovesLeft() {
-        for (int i = 0; i < board.getCells().size(); i++) {
-            board.getCells().get(i).setCellState(CellState.O);
-        }
+        setCells(getIntegerRange(0, board.getCells().size()), CellState.O);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenVictoryConditionIsMetForO() {
-        for (int i = 0; i < 3; i++) {
-            board.getCells().get(i).setCellState(CellState.O);
-        }
+        setCells(getIntegerRange(0, 3), CellState.O);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenHorizontalVictoryConditionIsMetForX() {
-        for (int i = 3; i < 6; i++) {
-            board.getCells().get(i).setCellState(CellState.X);
-        }
+        setCells(getIntegerRange(3, 6), CellState.O);
         assertTrue(board.isFinished());
     }
 
     @Test
     void shouldFinishWhenHorizontalVictoryConditionIsMetForO2() {
-        for (int i = 6; i < 9; i++) {
-            board.getCells().get(i).setCellState(CellState.X);
-        }
+        setCells(getIntegerRange(6, 9), CellState.X);
         assertTrue(board.isFinished());
     }
 
@@ -130,6 +123,10 @@ public class BoardTest {
     void shouldNotPlaceMoveOnOtherCells() {
         board.placeMove(2, CellState.O);
         assertNotEquals(board.getCells().get(1).getCellState(), CellState.O);
+    }
+
+    private List<Integer> getIntegerRange(Integer lowerLimit, Integer upperLimit) {
+        return IntStream.range(lowerLimit, upperLimit).boxed().collect(Collectors.toList());
     }
 
     private void setCells(List<Integer> cellIndices, CellState cellState) {
