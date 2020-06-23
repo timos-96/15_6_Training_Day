@@ -77,10 +77,9 @@ public class Board {
     }
 
     private Boolean isSymbolWinner(Integer[] winningCombination, CellState symbol) {
-        Boolean isWon = getCells().get(winningCombination[0]).cellState == symbol
+        return getCells().get(winningCombination[0]).cellState == symbol
             && getCells().get(winningCombination[1]).cellState == symbol
             && getCells().get(winningCombination[2]).cellState == symbol;
-        return isWon;
 
     }
 
