@@ -2,6 +2,7 @@ package com.Timos.Games.TicTacToeGame;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -61,13 +62,15 @@ public class Board {
     }
 
     private Boolean isWin() {
-        for (Integer[] winningCombination : winningCombinations) {
-            if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombination, CellState.X)) {
-                System.out.println("Congratulations you have won");
-                return true;
-            }
-        }
-        return false;
+        Boolean isWin = Arrays.stream(winningCombinations).anyMatch(this::isWin);
+        if (isWin) System.out.println("Congratulations you have won");
+        return isWin;
+    }
+
+    private boolean isWin(Integer[] winningCombination) {
+        return List.of(CellState.X, CellState.O)
+            .stream()
+            .anyMatch(cellState -> isSymbolWinner(winningCombination, cellState));
     }
 
     private Boolean isSymbolWinner(Integer[] winningCombination, CellState symbol) {
