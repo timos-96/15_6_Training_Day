@@ -24,16 +24,16 @@ public class BoardTest {
     @Test
     void shouldcreateAListOf9EmptyCells() {
         assertAll("Should return 9 empty cells",
-            () -> assertTrue(board.getCells().size() == 9),
-            () -> assertTrue(board.getCells().get(0).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(1).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(2).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(3).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(4).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(5).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(6).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(7).getCellState() == CellState.NOT_TAKEN),
-            () -> assertTrue(board.getCells().get(8).getCellState() == CellState.NOT_TAKEN));
+            () -> assertEquals(9, board.getCells().size()),
+            () -> assertSame(board.getCells().get(0).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(1).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(2).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(3).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(4).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(5).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(6).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(7).getCellState(), CellState.NOT_TAKEN),
+            () -> assertSame(board.getCells().get(8).getCellState(), CellState.NOT_TAKEN));
     }
 
     @Test
