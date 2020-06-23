@@ -57,9 +57,9 @@ public class Board {
     }
 
     public void showBoard() {
-        for (int i = 0; i < getCells().size(); i++) {
-            System.out.println(getCells().get(i).getCellState());
-        }
+        getCells().forEach(cell -> {
+            System.out.println(cell.getCellState());
+        });
     }
 
     public Boolean isFinished() {
@@ -67,9 +67,8 @@ public class Board {
     }
 
     private Boolean isWin() {
-        for (int i = 0; i < winningCombinations.length; i++) {
-            Integer[] winningCombination = winningCombinations[i];
-            if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombinations[i], CellState.X)) {
+        for (Integer[] winningCombination : winningCombinations) {
+            if (isSymbolWinner(winningCombination, CellState.O) || isSymbolWinner(winningCombination, CellState.X)) {
                 System.out.println("Congradulations you have won");
                 return true;
             }
