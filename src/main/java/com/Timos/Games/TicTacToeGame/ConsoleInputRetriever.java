@@ -10,8 +10,6 @@ import java.util.Scanner;
 @Component
 public class ConsoleInputRetriever implements IInputRetriever {
 
-    ConsoleInputRetriever(){}
-
     public Integer retrieveInput(InputStream in) {
         System.out.println("Please place move: ");
         Scanner scanner = new Scanner(in);
